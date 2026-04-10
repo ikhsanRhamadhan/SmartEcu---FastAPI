@@ -2,7 +2,6 @@ from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 import numpy as np
-from utils.donwload_model import download_model
 
 
 
@@ -14,13 +13,6 @@ from services.inference import run_inference
 
 app = FastAPI(title="Machine Diagnostics API")
 
-@app.on_event("startup")
-async def load_model():
-    try:
-        download_model()
-        print("Model loaded ✅")
-    except Exception as e:
-        print("Model gagal load:", e)
 
 # ===============================
 # CORS (WAJIB untuk React)
