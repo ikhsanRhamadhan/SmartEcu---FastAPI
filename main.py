@@ -13,6 +13,10 @@ from services.inference import run_inference
 
 app = FastAPI(title="Machine Diagnostics API")
 
+@app.get("/")
+def root():
+    return {"status": "ok 🚀"}
+
 
 # ===============================
 # CORS (WAJIB untuk React)
