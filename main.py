@@ -4,16 +4,8 @@ from datetime import datetime
 import numpy as np
 from utils.donwload_model import download_model
 
-from fastapi import FastAPI
 
-app = FastAPI()
 
-@app.get("/")
-def root():
-    return {"status": "ok 🚀"}
-
-# jalankan sebelum load model
-download_model()
 
 # ===============================
 # IMPORT PIPELINE ML
@@ -21,6 +13,10 @@ download_model()
 from services.inference import run_inference
 
 app = FastAPI(title="Machine Diagnostics API")
+
+@app.on_event("startup")
+async def load_model():
+    download_model()
 
 # ===============================
 # CORS (WAJIB untuk React)
